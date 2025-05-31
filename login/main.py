@@ -8,18 +8,10 @@ import functions
 
 users = []
 
-path = "C:/Users/pajeh/OneDrive/Documentos/estudos/MyProjects/projects/login/users/users.txt"
+path = "C:/Users/pajeh/OneDrive/Documentos/estudos/projects/login/users/users.txt"
 
 
-# verify file exist
-try:
-    with open(path, "rt") as file:
-        file.read()
-except:
-    with open(path, "wt+") as file:
-        file.read()
-
-# transform file in dict
+# verify file exist / transform file in dict
 
 try:
     with open(path, "rt") as file:
@@ -31,17 +23,18 @@ try:
             }
             users.append(user_dict)
 except:
-    print("error transform")
+    with open(path, "wt+") as file:
+        file.read()
 
 # central
 
-confirm = True
 option = functions.menu("Log in", "Sign in", "Quit")
 
 # verify options
 
 match option:
     case 1: # log in
+        confirm = True
         functions.lines(texto="LOG IN")
 
         while confirm:
@@ -60,7 +53,39 @@ match option:
                 if try_again in "Nn":
                     confirm = False
     case 2:
+        confirm = True
         functions.lines(texto="SIGN IN")
+        
+        while confirm:
+            username = str(input("Create username: ")).strip()
+            password = str(input("Create password: ")).strip()
+            confirm_password = str(input("Confirm password: ")).strip()
+
+            for user in users:
+
+                if user["username"] == username:
+                    print("username already exists")
+                    try_again = str(input("Try again? Y | N: "))[0] .strip()
+                    if try_again in "Nn":
+                        confirm = False
+                    break
+                        
+            else:
+                if password == confirm_password:
+                    with open(path, "a") as user_password:
+                        user_password.write(f"{username}:{password}\n")
+                        print("Created successfully")
+                        confirm = False
+                else:
+                    print("Wrong password")
+                try_again = str(input("Try again? Y | N: "))[0] .strip()
+                if try_again in "Nn":
+                    confirm = False
+    case 3:
+        print("Thank for testing")
+                        
+
+
 
 
 
