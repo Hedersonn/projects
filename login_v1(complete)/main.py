@@ -7,8 +7,8 @@ from functions import interface, system_login
 import requests
 import pygame
 
-path = "C:/Users/pajeh/OneDrive/Documentos/estudos/projects/login_v1/users/users.txt"
-path_music = "C:/Users/pajeh/OneDrive/Documentos/estudos/projects/login_v1/music.mp3"
+path = "C:/Users/pajeh/OneDrive/Documentos/estudos/projects/login_v1(complete)/users/users.txt"
+path_music = "C:/Users/pajeh/OneDrive/Documentos/estudos/projects/login_v1(complete)/music.mp3"
 
 # central
 
