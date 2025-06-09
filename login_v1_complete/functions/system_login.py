@@ -20,6 +20,7 @@ def logIn(path):
         dict_users = dictUsers(path)
         from functions import interface
         confirm = True
+        continue_menu = False
         interface.lines("LOG IN")
 
         while confirm:
@@ -29,6 +30,7 @@ def logIn(path):
             for user in dict_users:
                 if user["username"] == username and user["password"] == password:
                     print("PASS")
+                    continue_menu = True
                     confirm = False
                     break
             else:
@@ -37,6 +39,7 @@ def logIn(path):
 
                 if try_again in "Nn":
                     confirm = False
+        return continue_menu
     except:
         print("There was an error logging in user.")
 
@@ -74,3 +77,37 @@ def signIn(path):
                         confirm = False
     except:
         print("There was an error registering the user.")
+
+
+def loginChoice(path_music):
+    from functions import interface
+    import pygame
+    import requests
+    try:
+        choice = interface.menu("Coins", "Music", "Quit", menu=False)
+        match choice:
+            case 1:
+                try:
+                    interface.lines("COINS")
+                    info = requests.get("https://economia.awesomeapi.com.br/last/BRL-USD,EUR-USD,BTC-USD")
+                    info = info.json()
+                    real = info["BRLUSD"]["bid"]
+                    euro = info["EURUSD"]["bid"]
+                    btc = info["BTCUSD"]["bid"]
+                    print(f"R$ {real}\n€ {euro}\nBTC {btc}\n")
+                except:
+                    print("There was an error loading the information.")
+            case 2:
+                try:
+                    interface.lines("MUSIC")
+                    pygame.mixer.init()
+                    pygame.mixer_music.load(path_music)
+                    pygame.mixer.music.play()
+                    input("Press any key to stop the music\n")
+                    pygame.mixer.quit()
+                except:
+                    print("There was an error loading the music.")
+            case 3:
+                interface.end_system()
+    except:
+        print("Error, verify the program.")
