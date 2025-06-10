@@ -1,4 +1,4 @@
-from rpg_game_incomplete.character import Mage, Archer, Beast, Healer, Warrior, Character
+from rpg_game_incomplete.functions.character import Mage, Archer, Beast, Healer, Warrior, Character
 from random import randint
 
 
@@ -27,7 +27,6 @@ while True:
     choice = int(input("Who will you attack?"))
 
     if choice > 0 and choice < len(players) + 1:
-        if 
         print(f"{players[choice - 1].name}")
 
     else:
