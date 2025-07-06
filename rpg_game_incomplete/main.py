@@ -22,10 +22,16 @@ while True:
         attack = int(input("Who will you attack? ")) - 1
 
         if attack == current_index:
-            print("Error.")
+            print("Error, enter a number other than yours.")
+        # elif attack > len(players) or attack <= 0:
+        #     print("Number not exist.")
         else:
-            current_index = (current_index + 1) % len(players)
             break
 
     choice = utilities.menu("Attack", "Defense", "Support")
+    match choice:
+        case 1:
+            print(players[current_index].skills[attack])
+
+            
     

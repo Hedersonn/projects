@@ -9,6 +9,12 @@ class Character:
         self.attack = 0
         self.mana = None
         self.style = ""
+        self.defense = 0
+
+
+    def damage(self, target):
+        if self.defense == 0:
+            self.health -= self.attack
 
 
     def show_status(self):
@@ -29,10 +35,16 @@ class Mage(Character):
         self.mana = 100
         self.health = 80
         self.style = "Mage"
+        self.skills = {
+            "attack": ["fireball", "frost lance"],
+            "defense": ["arcane shield", "runic teleport"],
+            "support": ["foresight"]
+        }
 
     def fireball(self, target):
+        self.damage = 35
         self.mana -= 20
-        target.health -= 35
+        target.health -= self.damage
 
     def frost_lance(self, target):
         pass
@@ -53,6 +65,12 @@ class Warrior(Character):
 
         self.health = 150
         self.style = "Warrior"
+        self.skils = {
+            "attack": [devasting_strike, battle_fury],
+            "defend": [iron_wall, defensive_stance],
+            "support": [war_cry] 
+            
+        }
 
     def devastating_strike(self, target):
         pass
